@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_07/screen.dart';
+import 'package:project_07/screens/screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +10,13 @@ void main() {
 
   int userId = 6;
   if (userId == 6) {
-    print('UserId is $userId');
-    print('User is a human');
-    print('Name is $name');
-    print('Height is $height');
+    debugPrint('UserId is $userId');
+    debugPrint('User is a human');
+    debugPrint('Name is $name');
+    debugPrint('Height is $height');
   } else {
-    print('bot number: $data');
-    print('User is a robot');
+    debugPrint('bot number: $data');
+    debugPrint('User is a robot');
   }
 
   textitems();
@@ -24,7 +24,7 @@ void main() {
 
 void textitems() {
   int age = 21;
-  print("age is $age");
+ debugPrint("age is $age");
 }
 
 class MyApp extends StatelessWidget {
@@ -34,12 +34,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Mainscreen(),
+      home: const MainScreen(),
     );
   }
 }
