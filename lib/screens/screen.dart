@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter/cupertino.dart';
+import 'package:project_07/component/list_card.dart';
 import 'package:project_07/screens/form_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -31,6 +33,13 @@ class MainScreen extends StatelessWidget {
             textMethod('Completed'),
             listTilecard('Completed list',
                 'Discover the ultimate task management experience with our Flutter-based Todo app! 📅✨'),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const CreateList()));
+              },
+              child: const Text('Navigate to page'),
+            )
           ],
         ),
       ),
