@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:project_07/component/divider.dart';
 //todo list items
@@ -46,10 +48,7 @@ class ToDOlistItem extends StatelessWidget {
                         size: 35,
                       ),
           ),
-          trailing: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.more_vert),
-          ),
+          trailing: const DropDownMenu(),
           title: const Text(
             'This is Title',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -66,6 +65,61 @@ class ToDOlistItem extends StatelessWidget {
         ),
         const DividerLine(),
       ],
+    );
+  }
+}
+
+class DropDownMenu extends StatelessWidget {
+  const DropDownMenu({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<String>(
+      onSelected: (value) {
+        // Handle menu item selection here
+        if (value == 'view') {
+          log('View item Clicked');
+        } else if (value == 'edit') {
+          log('edit item Clicked');
+        } else if (value == 'delete') {
+          log('delete item Clicked');
+        } else if (value == 'markComplete') {
+          log('Mark as completed item Clicked');
+        }
+      },
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+        const PopupMenuItem<String>(
+          value: 'view',
+          child: ListTile(
+            leading: Icon(Icons.visibility),
+            title: Text('View'),
+          ),
+        ),
+        const PopupMenuItem<String>(
+          value: 'edit',
+          child: ListTile(
+            leading: Icon(Icons.edit),
+            title: Text('Edit'),
+          ),
+        ),
+        const PopupMenuItem<String>(
+          value: 'delete',
+          child: ListTile(
+            leading: Icon(Icons.delete),
+            title: Text('Delete'),
+          ),
+        ),
+        const PopupMenuItem<String>(
+          value: 'markComplete',
+          child: ListTile(
+            leading: Icon(Icons.check),
+            title: Text('Mark as Complete'),
+          ),
+        ),
+      ],
+      icon: const Icon(Icons.more_vert),
     );
   }
 }

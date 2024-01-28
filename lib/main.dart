@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // scrollBehavior: const ScrollBehavior(),
       debugShowCheckedModeBanner: false,
       title: 'Todo-App',
       theme: ThemeData(

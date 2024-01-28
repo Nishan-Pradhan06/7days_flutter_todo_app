@@ -8,6 +8,7 @@ class MainScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.deepPurple.shade100,
       appBar: appBar('TODO-LIST'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -16,7 +17,7 @@ class MainScreens extends StatelessWidget {
             textMethod('Uncompleted'),
             Container(
               decoration: BoxDecoration(
-                color: Colors.deepPurple.shade100,
+                color: Colors.deepPurple.shade200,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: const Column(
@@ -28,6 +29,19 @@ class MainScreens extends StatelessWidget {
               ),
             ),
             textMethod('Completed'),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple.shade200,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: const Column(
+                children: [
+                  ToDOlistItem('school'),
+                  ToDOlistItem('market'),
+                  ToDOlistItem('sports'),
+                ],
+              ),
+            ),
           ],
         ),
       ),
