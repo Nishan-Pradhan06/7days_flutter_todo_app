@@ -70,7 +70,7 @@ class FormScreen extends StatelessWidget {
                           decoration: InputDecoration(
                             fillColor: const Color(0XFFF5F2F9),
                             filled: true,
-                            hintText: "Task Item",
+                            hintText: "Aug-06-2024",
                             focusedBorder: formBorder(true),
                             enabledBorder: formBorder(false),
                           ),
@@ -100,7 +100,7 @@ class FormScreen extends StatelessWidget {
                           decoration: InputDecoration(
                             fillColor: const Color(0XFFF5F2F9),
                             filled: true,
-                            hintText: "Task Item",
+                            hintText: "00:00:00",
                             focusedBorder: formBorder(true),
                             enabledBorder: formBorder(false),
                           ),

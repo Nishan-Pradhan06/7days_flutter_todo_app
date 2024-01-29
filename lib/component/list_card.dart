@@ -5,8 +5,12 @@ import 'package:project_07/component/divider.dart';
 //todo list items
 
 class ToDOlistItem extends StatelessWidget {
-  final String categoryName;
-  const ToDOlistItem(this.categoryName, {super.key});
+  final Map<String, dynamic> task;
+  final String type;
+  final Function onDelete;
+  final Function onShift;
+  const ToDOlistItem(this.task, this.type,  this.onDelete,this.onShift,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,27 +20,27 @@ class ToDOlistItem extends StatelessWidget {
           leading: Container(
             padding: const EdgeInsets.all(4.0),
             decoration: BoxDecoration(
-              color: categoryName == 'school'
+              color: task['categories'] == 'school'
                   ? Colors.green.withOpacity(.5)
-                  : categoryName == 'market'
+                  : task['categories'] == 'market'
                       ? Colors.deepOrange.withOpacity(.5)
-                      : Colors.pink.withOpacity(.5),
+                      : Colors.pink.withOpacity(.6),
               border: Border.all(
-                color: categoryName == 'school'
+                color: task['categories'] == 'school'
                     ? Colors.green
-                    : categoryName == 'market'
+                    : task['categories'] == 'market'
                         ? Colors.deepOrange
                         : Colors.pink,
               ),
               borderRadius: BorderRadius.circular(360),
             ),
-            child: categoryName == 'school'
+            child: task['categories'] == 'school'
                 ? Icon(
                     Icons.school,
                     color: Colors.green.shade700,
                     size: 35,
                   )
-                : categoryName == 'market'
+                : task['categories'] == 'market'
                     ? Icon(
                         Icons.shopping_cart,
                         color: Colors.orange.shade900,
@@ -48,78 +52,71 @@ class ToDOlistItem extends StatelessWidget {
                         size: 35,
                       ),
           ),
-          trailing: const DropDownMenu(),
-          title: const Text(
-            'This is Title',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          trailing: PopupMenuButton<String>(
+            onSelected: (value) {
+              // Handle menu item selection here
+              if (value == 'view') {
+                log('View item Clicked');
+              } else if (value == 'edit') {
+                log('edit item Clicked');
+              } else if (value == 'delete') {
+                onDelete();
+                log('delete item Clicked');
+              } else if (value == 'markComplete') {
+                onShift();
+                log('Mark as completed item Clicked');
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'view',
+                child: ListTile(
+                  leading: Icon(Icons.visibility),
+                  title: Text('View'),
+                ),
+              ),
+              const PopupMenuItem<String>(
+                value: 'edit',
+                child: ListTile(
+                  leading: Icon(Icons.edit),
+                  title: Text('Edit'),
+                ),
+              ),
+              const PopupMenuItem<String>(
+                value: 'delete',
+                child: ListTile(
+                  leading: Icon(Icons.delete),
+                  title: Text('Delete'),
+                ),
+              ),
+              PopupMenuItem<String>(
+                value: 'markComplete',
+                child: ListTile(
+                  leading: const Icon(Icons.check),
+                  title: Text(type == "completed"
+                      ? 'Mark as Uncomplete'
+                      : 'Mark as Completed'),
+                ),
+              ),
+            ],
+            icon: const Icon(Icons.more_vert),
+          ),
+          title: Text(
+            task['title'],
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           isThreeLine: true,
-          subtitle: const Text(
-            'orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+          subtitle: Text(
+            task['description'],
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
             ),
           ),
         ),
         const DividerLine(),
       ],
-    );
-  }
-}
-
-class DropDownMenu extends StatelessWidget {
-  const DropDownMenu({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return PopupMenuButton<String>(
-      onSelected: (value) {
-        // Handle menu item selection here
-        if (value == 'view') {
-          log('View item Clicked');
-        } else if (value == 'edit') {
-          log('edit item Clicked');
-        } else if (value == 'delete') {
-          log('delete item Clicked');
-        } else if (value == 'markComplete') {
-          log('Mark as completed item Clicked');
-        }
-      },
-      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-        const PopupMenuItem<String>(
-          value: 'view',
-          child: ListTile(
-            leading: Icon(Icons.visibility),
-            title: Text('View'),
-          ),
-        ),
-        const PopupMenuItem<String>(
-          value: 'edit',
-          child: ListTile(
-            leading: Icon(Icons.edit),
-            title: Text('Edit'),
-          ),
-        ),
-        const PopupMenuItem<String>(
-          value: 'delete',
-          child: ListTile(
-            leading: Icon(Icons.delete),
-            title: Text('Delete'),
-          ),
-        ),
-        const PopupMenuItem<String>(
-          value: 'markComplete',
-          child: ListTile(
-            leading: Icon(Icons.check),
-            title: Text('Mark as Complete'),
-          ),
-        ),
-      ],
-      icon: const Icon(Icons.more_vert),
     );
   }
 }
